@@ -13,18 +13,19 @@ function App() {
             <li>
               <Link to="/">选择业务线</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/edit">新建/编辑数据</Link>
             </li>
             <li>
               <Link to="/detail">数据详情页面</Link>
-            </li>
+            </li> */}
           </ul>
         </nav>
         <div className="switch-area">
           <Switch>
             <Route path="/" exact component={ChooseLine}></Route>
             <Route path="/edit" component={EditOrCreate}></Route>
+            <Route path="/create" component={EditOrCreate}></Route>
             <Route path="/detail" component={Detail}></Route>
             <Route component={ChooseLine}></Route>
           </Switch>
