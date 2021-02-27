@@ -1,6 +1,20 @@
 import React, { Component } from "react";
+
 import { solveSearchToObj } from "../../util/index";
+import { EditOrCreateHoc } from "../../Hoc/EditOrCreateHoc";
 import "./index.less";
+
+const formItemLayout = {
+  labelCol: {
+    xs: { span: 24 },
+    sm: { span: 8 },
+  },
+  wrapperCol: {
+    xs: { span: 24 },
+    sm: { span: 16 },
+  },
+};
+@EditOrCreateHoc
 class EditOrCreatePage extends Component {
   state = { canRender: false };
   componentDidMount() {
@@ -33,7 +47,18 @@ class EditOrCreatePage extends Component {
 
   render() {
     const { canRender, pageData = {} } = this.state;
-    return <div>EditOrCreatePage</div>;
+    const { page } = this.props;
+    const renderCompArr = Object.keys(pageData).map((compName) => {
+      return {
+        compName,
+        initData: { ...(pageData[compName] || {}) },
+      };
+    });
+    return (
+      <div className="page-comp-container">
+        {page.renderPage(renderCompArr, this.props)}
+      </div>
+    );
   }
 }
 
