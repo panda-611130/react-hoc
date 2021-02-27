@@ -414,6 +414,15 @@ module.exports = function (webpackEnv) {
 
                 plugins: [
                   [
+                    "import",
+                    {
+                      libraryName: "antd",
+                      libraryDirectory: "es",
+                      style: "css",
+                    },
+                    "antd",
+                  ],
+                  [
                     require.resolve("babel-plugin-named-asset-import"),
                     {
                       loaderMap: {

@@ -1,36 +1,32 @@
 import "./app.less";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  hashHistory,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import ChooseLine from "./pages/ChooseLine";
+import Detail from "./pages/Detail";
+import EditOrCreate from "./pages/EditOrCreate";
+
 function App() {
   return (
     <div className="root-app">
-      <Router history={hashHistory}>
-        <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-              <li>
-                <Link to="/users">Users</Link>
-              </li>
-            </ul>
-          </nav>
-
-          {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
+      <Router>
+        <nav className="nav-area">
+          <ul>
+            <li>
+              <Link to="/">选择业务线</Link>
+            </li>
+            <li>
+              <Link to="/edit">新建/编辑数据</Link>
+            </li>
+            <li>
+              <Link to="/detail">数据详情页面</Link>
+            </li>
+          </ul>
+        </nav>
+        <div className="switch-area">
           <Switch>
-            <Route path="/about" render={() => <div>about</div>}></Route>
-            <Route path="/users" render={() => <div>users</div>}></Route>
-            <Route path="/" render={() => <div>Home</div>}></Route>
+            <Route path="/" exact component={ChooseLine}></Route>
+            <Route path="/edit" component={EditOrCreate}></Route>
+            <Route path="/detail" component={Detail}></Route>
+            <Route component={ChooseLine}></Route>
           </Switch>
         </div>
       </Router>
