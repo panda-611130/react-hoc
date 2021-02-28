@@ -3,30 +3,41 @@ import React from "react";
 export const ComponentFormWrapper = (DataComponent) => {
   return class extends DataComponent {
     validateComponent(preDataStatus) {
-      console.log("====上一个组件状态===", preDataStatus);
       if (!preDataStatus) {
         //如果上一个区块数据搜集失败了下个区块也不搜集了
-        // return Promise.reject(false);
         return Promise.reject(false);
       }
-      if (super.getData) {
-        return super.getData();
-      } else {
-        return this.getData();
-      }
+      return this.validate();
     }
 
     getData() {
+      const {
+        DataName,
+        form: { getFieldsValue },
+      } = this.props;
+      const data = getFieldsValue();
+      return {
+        [DataName]: data,
+      };
+    }
+
+    validate() {
       const { validateFields } = this.props.form;
-      return validateFields((err, value) => {
+      let selfValidateSuccess = true;
+      validateFields((err, value) => {
         if (err) {
-          //   return
-          Promise.reject(false);
+          selfValidateSuccess = false;
           return;
+        } else {
+          selfValidateSuccess = true;
         }
-        // return
-        Promise.resolve(true);
       });
+
+      if (selfValidateSuccess) {
+        return Promise.resolve(true);
+      } else {
+        return Promise.reject(false);
+      }
     }
 
     componentDidMount() {

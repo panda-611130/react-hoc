@@ -7,7 +7,7 @@ class B extends React.Component {
   render() {
     const {
       form: { getFieldDecorator },
-      initData,
+      Data,
     } = this.props;
 
     return (
@@ -17,6 +17,7 @@ class B extends React.Component {
         >
           <Form.Item label="input-B">
             {getFieldDecorator("emailB", {
+                 initialValue: Data.emailB,
               rules: [
                 {
                   required: true,

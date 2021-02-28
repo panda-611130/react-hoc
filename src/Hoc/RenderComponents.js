@@ -1,4 +1,5 @@
 import React from "react";
+import { componentConfig } from "./componentConfig.js";
 import A from "../components/A/index";
 import B from "../components/B/index";
 import C from "../components/C/index";
@@ -23,8 +24,9 @@ export const RenderComponents = (modules, extraProps) => {
       return (
         <ComponentItem
           key={item.compName}
+          Data={item.Data || {}}
           {...extraProps}
-          initData={item.initData || {}}
+          {...componentConfig[item.compName]}
         />
       );
     })

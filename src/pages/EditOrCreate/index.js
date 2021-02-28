@@ -3,18 +3,8 @@ import React, { Component } from "react";
 import { solveSearchToObj } from "../../util/index";
 import { EditOrCreateHoc } from "../../Hoc/EditOrCreateHoc";
 import "./index.less";
-import { Button } from "antd";
+import { Button, message } from "antd";
 
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 8 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 16 },
-  },
-};
 @EditOrCreateHoc
 class EditOrCreatePage extends Component {
   state = { canRender: false };
@@ -47,12 +37,26 @@ class EditOrCreatePage extends Component {
   };
   collectPageData() {
     const { page } = this.props;
+    const { search } = this.props.location;
+    const { pageId } = solveSearchToObj(search);
     page.validateCompData().then(
       (success) => {
-        console.log("=====最终 success ====", success);
+        message.error("串行检验数据成功，可以正式进行数据收集");
+        const pageData = {
+          pageId,
+          pageData: {
+            ...page.fullPageData,
+          },
+        };
+        const preData = JSON.parse(localStorage.getItem("pageEntity") || "[]");
+        const beReplaceIndex = preData.findIndex(
+          (item) => item.pageId === pageId
+        );
+        preData.splice(beReplaceIndex, 1, pageData);
+        localStorage.setItem("pageEntity", JSON.stringify(preData));
       },
       (err) => {
-        console.log("==== 最终 error ====", err);
+        message.error("串行检验数据失败");
       }
     );
   }
@@ -63,7 +67,7 @@ class EditOrCreatePage extends Component {
     const renderCompArr = Object.keys(pageData).map((compName) => {
       return {
         compName,
-        initData: { ...(pageData[compName] || {}) },
+        Data: { ...(pageData[compName] || {}) },
       };
     });
     return (

@@ -6,25 +6,24 @@ export const EditOrCreateHoc = (WrappedComponent) =>
 
     get fullPageData() {
       return this.components.reduce((preCompdata, nextComp) => {
-        return {
+        const pre = (preCompdata.getData && preCompdata.getData()) || {
           ...preCompdata,
+        };
+        return {
+          ...pre,
           ...nextComp.getData(),
         };
       }, {});
     }
 
     validateCompData() {
-      console.log("====this.components===", this.components);
       return this.components.reduce((promise, nextComponent) => {
         return promise.then(
           (res) => {
-            console.log("======resolve res ======", res);
             return nextComponent.validateComponent(true);
           },
           (res) => {
-            console.log("======reject res ======", res);
             return nextComponent.validateComponent(false);
-            // return nextComponent.validateComponent(true);
           }
         );
       }, Promise.resolve(true));

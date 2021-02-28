@@ -7,7 +7,7 @@ class C extends React.Component {
   render() {
     const {
       form: { getFieldDecorator },
-      initData,
+      Data,
     } = this.props;
     return (
       <div style={{ margin: "12px 0", border: "2px solid black" }}>
@@ -16,6 +16,7 @@ class C extends React.Component {
         >
           <Form.Item label="input-C">
             {getFieldDecorator("emailC", {
+                 initialValue: Data.emailC,
               rules: [
                 {
                   required: true,
