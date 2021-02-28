@@ -11,11 +11,11 @@ class EditOrCreatePage extends Component {
   componentDidMount() {
     const { search, pathname } = this.props.location;
     const { pageId } = solveSearchToObj(search);
-    if (pathname.indexOf("edit") !== -1 && pageId) {
-      this.mockReqData();
-    } else {
-      this.setState({ canRender: true });
-    }
+    // if (pathname.indexOf("edit") !== -1 && pageId) {
+    this.mockReqData();
+    // } else {
+    this.setState({ canRender: true });
+    // }
   }
   mockReqData = () => {
     const { search } = this.props.location;
@@ -36,12 +36,11 @@ class EditOrCreatePage extends Component {
     );
   };
   collectPageData() {
-    const { page } = this.props;
+    const { page,history } = this.props;
     const { search } = this.props.location;
     const { pageId } = solveSearchToObj(search);
     page.validateCompData().then(
       (success) => {
-        message.error("串行检验数据成功，可以正式进行数据收集");
         const pageData = {
           pageId,
           pageData: {
@@ -54,6 +53,8 @@ class EditOrCreatePage extends Component {
         );
         preData.splice(beReplaceIndex, 1, pageData);
         localStorage.setItem("pageEntity", JSON.stringify(preData));
+        message.error("串行获取数据成功 打开localStorage 查看结果");
+        this.props.history.push("/")
       },
       (err) => {
         message.error("串行检验数据失败");

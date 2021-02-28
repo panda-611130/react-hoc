@@ -11,7 +11,7 @@ function App() {
         <nav className="nav-area">
           <ul>
             <li>
-              <Link to="/">选择业务线</Link>
+              <Link to="/">首页</Link>
             </li>
             {/* <li>
               <Link to="/edit">新建/编辑数据</Link>

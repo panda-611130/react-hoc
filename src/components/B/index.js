@@ -17,7 +17,7 @@ class B extends React.Component {
         >
           <Form.Item label="input-B">
             {getFieldDecorator("emailB", {
-                 initialValue: Data.emailB,
+              initialValue: Data.emailB,
               rules: [
                 {
                   required: true,

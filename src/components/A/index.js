@@ -9,7 +9,6 @@ class A extends React.Component {
       form: { getFieldDecorator },
       Data,
     } = this.props;
-    console.log("====this.pros =====", this.props);
     return (
       <div style={{ margin: "12px 0", border: "2px solid black" }}>
         <Form
