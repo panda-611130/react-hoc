@@ -1,18 +1,14 @@
 import React from "react";
 import { Form, Input } from "antd";
+import { ComponentFormWrapper } from "../../Hoc/ComponentFormWrapper";
+
+@ComponentFormWrapper
 class A extends React.Component {
-  mockCollectDate = () => {
-    const { validateFields } = this.props.form;
-    validateFields((err, value) => {
-      console.log("====value====", value);
-    });
-  };
   render() {
     const {
       form: { getFieldDecorator },
       initData,
     } = this.props;
-
     return (
       <div style={{ margin: "12px 0", border: "2px solid black" }}>
         <Form
@@ -29,8 +25,6 @@ class A extends React.Component {
             })(<Input />)}
           </Form.Item>
         </Form>
-
-        <div onClick={() => this.mockCollectDate()}>123123</div>
       </div>
     );
   }

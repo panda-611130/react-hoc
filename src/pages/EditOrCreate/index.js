@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { solveSearchToObj } from "../../util/index";
 import { EditOrCreateHoc } from "../../Hoc/EditOrCreateHoc";
 import "./index.less";
+import { Button } from "antd";
 
 const formItemLayout = {
   labelCol: {
@@ -44,6 +45,17 @@ class EditOrCreatePage extends Component {
       }
     );
   };
+  collectPageData() {
+    const { page } = this.props;
+    page.validateCompData().then(
+      (success) => {
+        console.log("=====最终 success ====", success);
+      },
+      (err) => {
+        console.log("==== 最终 error ====", err);
+      }
+    );
+  }
 
   render() {
     const { canRender, pageData = {} } = this.state;
@@ -57,6 +69,7 @@ class EditOrCreatePage extends Component {
     return (
       <div className="page-comp-container">
         {page.renderPage(renderCompArr, this.props)}
+        <Button onClick={() => this.collectPageData()}>搜集页面所有数据</Button>
       </div>
     );
   }

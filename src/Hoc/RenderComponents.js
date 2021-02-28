@@ -18,6 +18,7 @@ export const RenderComponents = (modules, extraProps) => {
   return (
     Array.isArray(modules) &&
     modules.map((item) => {
+      // console.log("===extraProps===", extraProps);
       const ComponentItem = componentMap[item.compName];
       return (
         <ComponentItem
