@@ -35,8 +35,9 @@ class EditOrCreatePage extends Component {
       }
     );
   };
+
   collectPageData() {
-    const { page,history } = this.props;
+    const { page, history } = this.props;
     const { search } = this.props.location;
     const { pageId } = solveSearchToObj(search);
     page.validateCompData().then(
@@ -54,7 +55,7 @@ class EditOrCreatePage extends Component {
         preData.splice(beReplaceIndex, 1, pageData);
         localStorage.setItem("pageEntity", JSON.stringify(preData));
         message.error("串行获取数据成功 打开localStorage 查看结果");
-        this.props.history.push("/")
+        this.props.history.push("/");
       },
       (err) => {
         message.error("串行检验数据失败");

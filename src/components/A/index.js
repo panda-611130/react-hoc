@@ -4,6 +4,25 @@ import { ComponentFormWrapper } from "../../Hoc/ComponentFormWrapper";
 
 @ComponentFormWrapper
 class A extends React.Component {
+  getData() {
+    const {
+      DataName,
+      form: { getFieldsValue },
+    } = this.props;
+
+    const data = getFieldsValue();
+
+    // 在下面我们可以对当前组件搜集上来的数据进行一些定制化的处理，最终放回就可以了
+    //mock start
+    Object.assign(data, {
+      fromCompSelf: "在组件内部可以定义数据搜集后的处理方式",
+    });
+    //mock end
+
+    return {
+      [DataName]: data,
+    };
+  }
   render() {
     const {
       form: { getFieldDecorator },

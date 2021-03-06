@@ -35,7 +35,7 @@ export const EditOrCreateHoc = (WrappedComponent) =>
         moudules,
         instanceRef: (component) => this.components.push(component),
       };
-      console.log("=======moudules========",moudules);
+      console.log("=======moudules========", moudules);
       return RenderComponents(moudules, props);
     };
 

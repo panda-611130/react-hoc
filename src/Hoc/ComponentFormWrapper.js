@@ -11,11 +11,16 @@ export const ComponentFormWrapper = (DataComponent) => {
     }
 
     getData() {
+      if (super.getData) {
+        return super.getData();
+      }
       const {
         DataName,
         form: { getFieldsValue },
       } = this.props;
+
       const data = getFieldsValue();
+
       return {
         [DataName]: data,
       };
